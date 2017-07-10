@@ -1,18 +1,6 @@
-/*
- d1. Реализовать EventBus
-
- создать конструктор
- создать метод on
- coздать метод off
- создать метод trigger
- создать метод once
- вызвать конструктор
- */
-
 function EventBus() {
     this.listeners = {};
 }
-
 EventBus.prototype.on = function (ev, handler) {
     this.listeners[ev] = this.listeners[ev] || [];
     this.listeners[ev].push(handler);
@@ -34,12 +22,4 @@ EventBus.prototype.once = function (ev, handler) {
         that.off(ev, offMethod);
     });
 };
-
 export default EventBus;
-
-// var eventBus = new EventBus();
-// var handler = (a, b, c) => console.log('Handler', a, b, c);
-// eventBus.once('one', handler);
-// eventBus.trigger('one', 1,2,3);
-// // Handler 1 2 3
-// eventBus.trigger('one');

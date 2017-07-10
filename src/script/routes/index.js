@@ -1,10 +1,9 @@
-var div = document.querySelector('div.main');
+import { BuildStartPage } from "../components/BuildStartPage";
 var index = {
-    name: 'index',
-    match: '',
-    onBeforeEnter: () => console.log(`onBeforeEnter index`),
-    onEnter: () => console.log(`onEnter index`), //Когда пользователь не авторизован, то показывать произвольный текст на экране
-    onLeave: () => console.log('onLeave index')
+  name: "StartPage",
+  match: "",
+  onBeforeEnter: () => console.log(`onBeforeEnter index`),
+  onEnter: () => BuildStartPage(),
+  onLeave: () => console.log("onLeave index")
 };
-
-export { index };
+export default { index };
