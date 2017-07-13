@@ -1,9 +1,13 @@
-import { BuildStartPage } from "../components/BuildStartPage";
+import { BuildStartPage, UserOnline } from "../components/BuildStartPage";
+var div = document.querySelector(".render");
 var index = {
-  name: "StartPage",
+  name: "index",
   match: "",
   onBeforeEnter: () => console.log(`onBeforeEnter index`),
   onEnter: () => BuildStartPage(),
-  onLeave: () => console.log("onLeave index")
+  onLeave: () => {
+    document.querySelector(".render").innerHTML = "";
+  }
 };
-export default { index };
+
+export { index };
