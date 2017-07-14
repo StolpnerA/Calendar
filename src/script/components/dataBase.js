@@ -13,13 +13,9 @@ class db {
   }
   SaveEventInDB(caption, dateDay) {
     var obj = this.getAll(window.userOnline);
-    //obj.tasks = caption;
-    debugger;
     if (obj.tasks[`${dateDay}`]) {
       var arr = obj.tasks[`${dateDay}`].title;
       arr.push(caption);
-      console.log(arr);
-      console.log(obj);
     } else {
       obj.tasks[`${dateDay}`] = {
         title: [],
@@ -29,7 +25,6 @@ class db {
       var arr = obj.tasks[`${dateDay}`].title;
       arr.push(caption);
     }
-
     localStorage.setItem(`${window.userOnline}`, JSON.stringify(obj));
   }
 }
