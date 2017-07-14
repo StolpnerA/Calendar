@@ -159,12 +159,14 @@ class calendarPage {
     let dataBase = new db();
     dataBase.SaveEventInDB(q, data);
   }
-  delCaption(e) {
+  delCaption(e, dateMonth) {
     var target = e.target;
     if (target.tagName !== "BUTTON") return;
     var text = target.parentNode.innerHTML.slice(0, -34);
     var date = target.parentNode.parentNode.className;
     target.parentNode.remove();
+    let dataBase = new db();
+    dataBase.deleteEventInDB(date, text);
   }
 }
 export default calendarPage;

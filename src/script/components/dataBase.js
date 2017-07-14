@@ -27,5 +27,14 @@ class db {
     }
     localStorage.setItem(`${window.userOnline}`, JSON.stringify(obj));
   }
+  deleteEventInDB(dateDay, text) {
+    var obj = this.getAll(window.userOnline);
+    var index = obj.tasks[`${dateDay}`].title.indexOf(text);
+    obj.tasks[`${dateDay}`].title.splice(index, 1);
+    localStorage.setItem(`${window.userOnline}`, JSON.stringify(obj));
+  }
+  loadFromDB() {
+    var obj = this.getAll(window.userOnline);
+  }
 }
 export default db;
