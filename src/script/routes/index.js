@@ -1,12 +1,16 @@
-import { BuildStartPage, UserOnline } from "../components/BuildStartPage";
-var div = document.querySelector(".render");
+import indexPage from "../components/IndexPage";
+var div = document.querySelector("div");
 var index = {
   name: "index",
   match: "",
   onBeforeEnter: () => console.log(`onBeforeEnter index`),
-  onEnter: () => BuildStartPage(),
+  onEnter: () => {
+    let index = new indexPage();
+    index.renderPage();
+    index.addHendler();
+  },
   onLeave: () => {
-    document.querySelector(".render").innerHTML = "";
+    document.querySelector("div").innerHTML = "";
   }
 };
 
