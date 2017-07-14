@@ -1,3 +1,4 @@
+import db from "./dataBase";
 class calendarPage {
   Render(dateMonth) {
     this.buildHeader();
@@ -113,7 +114,7 @@ class calendarPage {
       );
     document
       .querySelector("table")
-      .addEventListener("dblclick", () => this.addCaption(event));
+      .addEventListener("dblclick", () => this.addCaption(event, dateMonth));
     document
       .querySelector("table")
       .addEventListener("click", () => this.delCaption(event));
@@ -148,16 +149,15 @@ class calendarPage {
     document.querySelector(".CalendarPlace").innerHTML = "";
     this.renderCalendar(dateMonth);
   }
-  addCaption(e) {
+  addCaption(e, dateMonth) {
     var target = e.target;
     if (target.tagName !== "TD") return;
     var data = target.className;
     var q = prompt("Введите заголовок события?", "Пожрать");
     if (!q) return;
     target.innerHTML += `<div id="events">${q}<button class="cross">[x]</button></div>`;
-    var caption = JSON.parse(localStorage.getItem("calendar"));
-    var obj = caption[`${localStorage.getItem("User")}`].date;
-    this.saveInDB(data, q);
+    let dataBase = new db();
+    dataBase.SaveEventInDB(q, data);
   }
   delCaption(e) {
     var target = e.target;
