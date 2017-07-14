@@ -1,4 +1,4 @@
-import { signIn } from "./signIn";
+import signIn from "./signIn";
 import db from "./dataBase";
 class indexPage {
   renderPage() {

@@ -1,14 +1,11 @@
 import calendarPage from "../components/CalendarPage";
-import { userOnline } from "../components/signIn";
+//import { userOnline } from "../components/signIn";
 var div = document.querySelector("div");
 var Calendar = {
   name: "Calendar",
   match: text => text === "Calendar",
   onBeforeEnter: () => {
-    var ls = localStorage.getItem("user");
-    if (ls != userOnline && ls == null) {
-      location.hash = "";
-    }
+    if (!window.userOnline) location.hash = "";
   },
   onEnter: () => {
     let dateMonth = [];
@@ -23,7 +20,7 @@ var Calendar = {
   onLeave: () => {
     document.querySelector("header").innerHTML = "";
     div.innerHTML = "";
-    localStorage.removeItem("user");
+    window.userOnline = "";
   }
 };
 

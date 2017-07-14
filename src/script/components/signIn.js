@@ -1,48 +1,37 @@
 import db from "./dataBase";
-var userOnline = "";
+var userOnline;
+window.userOnline = "";
 class signIn {
   constructor() {
     this.db = new db();
   }
   trySigninByLoginAndPass(login, password) {
     return new Promise((resolve, reject) => {
-      let users = this.db.getAll();
-      for (var name in users) {
-        let user = users[name] || {};
-        if (
-          name == login &&
-          user.password == password &&
-          login != "" &&
-          password != ""
-        ) {
-          userOnline = login;
-          localStorage.setItem("user", login);
-          return resolve();
-        }
+      let user = this.db.getAll(login);
+      if (
+        user != null &&
+        user.password == password &&
+        login != "" &&
+        password != ""
+      ) {
+        window.userOnline = login;
+        return resolve();
       }
       reject();
     });
   }
+
   tryRegisterWithLoginAndEmail(login, password) {
     return new Promise((resolve, reject) => {
-      let users = this.db.getAll();
-      if (!users) {
-        userOnline = login;
+      let user = this.db.getAll(login);
+      if (!user) {
         this.db.addUser({}, login, password);
-        localStorage.setItem("user", login);
+        window.userOnline = login;
         return resolve();
       } else {
-        for (var name in users) {
-          if (name == login || login == "") {
-            return reject();
-          }
-        }
-        userOnline = login;
-        this.db.addUser({}, login, password);
-        localStorage.setItem("user", login);
-        resolve();
+        return reject();
       }
     });
   }
 }
-export { signIn, userOnline };
+export default signIn;

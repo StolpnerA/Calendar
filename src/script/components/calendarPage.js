@@ -10,11 +10,10 @@ class calendarPage {
   buildHeader() {
     var header = document.querySelector("header");
     var div = document.querySelector("div");
-    var user = localStorage.getItem("user");
     header = header.innerHTML = `
   <div class="col-md-9"></div>
             <div class="col-md-3">
-            <p class="lead">${user} <button class="btn btn-default" id="exit">Выход</button><p>
+            <p class="lead">${window.userOnline} <button class="btn btn-default" id="exit">Выход</button><p>
             </div>`;
     div = div.innerHTML = ` 
   <div class="contant">

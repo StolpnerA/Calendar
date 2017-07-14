@@ -1,15 +1,14 @@
 class db {
   addUser(task, login, pass) {
     if (!task || !login || !pass) return;
-    let ls = this.getAll();
-    ls[`${login}`] = {
+    var obj = {
       password: pass,
       tasks: task
     };
-    localStorage.setItem("users", JSON.stringify(ls));
+    localStorage.setItem(`${login}`, JSON.stringify(obj));
   }
-  getAll() {
-    var ls = JSON.parse(localStorage.getItem("users")) || {};
+  getAll(login) {
+    var ls = JSON.parse(localStorage.getItem(`${login}`));
     return ls;
   }
 }
