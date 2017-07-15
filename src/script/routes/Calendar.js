@@ -6,7 +6,8 @@ var Calendar = {
   match: text => text === "Calendar",
   onBeforeEnter: () => {
     // при заходе на страницу проверяеться, залогино ли ты заходишь , если нет то пошел вон!
-    if (!window.userOnline) location.hash = "";
+
+    if (!sessionStorage.getItem("user")) location.hash = "";
   },
   onEnter: () => {
     // тут создаеться массив с годом и месяцем для передачи его в рендер
@@ -24,7 +25,6 @@ var Calendar = {
     //при выходе с страницы чистица header ,div, userOnline
     document.querySelector("header").innerHTML = "";
     div.innerHTML = "";
-    window.userOnline = "";
   }
 };
 

@@ -14,7 +14,7 @@ class db {
   }
   SaveEventInDB(caption, dateDay) {
     // сохранение Заголовка в системе + создание системы хранения для текства и коментраиев и готова задача или нет
-    var obj = this.getAll(window.userOnline);
+    var obj = this.getAll(sessionStorage.getItem("user"));
     if (obj.tasks[`${dateDay}`]) {
       var arr = obj.tasks[`${dateDay}`].title;
       arr.push(caption);
@@ -28,18 +28,24 @@ class db {
       var arr = obj.tasks[`${dateDay}`].title;
       arr.push(caption);
     }
-    localStorage.setItem(`${window.userOnline}`, JSON.stringify(obj));
+    localStorage.setItem(
+      `${sessionStorage.getItem("user")}`,
+      JSON.stringify(obj)
+    );
   }
   deleteEventInDB(dateDay, text) {
     //удаление пока только заголовка
-    var obj = this.getAll(window.userOnline);
+    var obj = this.getAll(sessionStorage.getItem("user"));
     var index = obj.tasks[`${dateDay}`].title.indexOf(text);
     obj.tasks[`${dateDay}`].title.splice(index, 1);
-    localStorage.setItem(`${window.userOnline}`, JSON.stringify(obj));
+    localStorage.setItem(
+      `${sessionStorage.getItem("user")}`,
+      JSON.stringify(obj)
+    );
   }
   loadFromDB() {
     // загрузки пока нету тут только пока базавая прогрузка объека
-    var obj = this.getAll(window.userOnline);
+    var obj = this.getAll(sessionStorage.getItem("user"));
   }
 }
 export default db;

@@ -16,7 +16,9 @@ class calendarPage {
     header = header.innerHTML = `
   <div class="col-md-9"></div>
             <div class="col-md-3">
-            <p class="lead">${window.userOnline} <button class="btn btn-default" id="exit">Выход</button><p>
+            <p class="lead">${sessionStorage.getItem(
+              "user"
+            )} <button class="btn btn-default" id="exit">Выход</button><p>
             </div>`;
     div = div.innerHTML = ` 
   <div class="contant">

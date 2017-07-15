@@ -1,6 +1,4 @@
 import db from "./dataBase";
-var userOnline;
-window.userOnline = "";
 class signIn {
   constructor() {
     this.db = new db();
@@ -14,7 +12,7 @@ class signIn {
         login != "" &&
         password != ""
       ) {
-        window.userOnline = login;
+        sessionStorage.setItem("user", `${login}`);
         return resolve();
       }
       reject();
@@ -26,7 +24,7 @@ class signIn {
       let user = this.db.getAll(login);
       if (!user) {
         this.db.addUser({}, login, password);
-        window.userOnline = login;
+        sessionStorage.setItem("user", `${login}`);
         return resolve();
       } else {
         return reject();
