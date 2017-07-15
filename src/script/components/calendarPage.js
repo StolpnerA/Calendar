@@ -113,7 +113,7 @@ class calendarPage {
       return day - 1;
     }
     createCalendar(year, month); //вызов внутренней функции рендара каледаря
-
+    this.addHandlerEvent(dateMonth);
     return dateMonth; // возращяем дату на которую производился рендар календаря
   }
   addHandlerEvent(dateMonth) {
@@ -147,7 +147,7 @@ class calendarPage {
       dateMonth[1] = month;
     }
     document.querySelector(".CalendarPlace").innerHTML = ""; // очистка календаря для того что бы даты менялись
-    this.renderCalendar(dateMonth); // тут сам вызов данного метада для рендара
+    //this.renderCalendar(dateMonth); // тут сам вызов данного метада для рендара
   }
   addEventForBackButoon(dateMonth) {
     // тут код вычита месяца или года в зависимости какой месяц пришел + вызов функции рендара полученной даты
