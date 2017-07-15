@@ -102,6 +102,9 @@ class calendarPage {
       table += "</tr></table>";
       // только одно присваивание innerHTML
       elem.innerHTML = table;
+      let dataBase = new db();
+
+      dataBase.loadFromDB();
     }
     function getDay(date) {
       // получить номер дня недели, от 0(пн) до 6(вс)
