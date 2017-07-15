@@ -17,7 +17,6 @@ class indexPage {
             </div>
             <div  id="eror"></div>
                 <button type="button" class="btn btn-large btn-success" id="butAut" >Вход</button>
-                <a href="#Calendar">fsdf</a>
         </div>
         </div>`;
     div = div.innerHTML = CreateDiv; // отрисовка страницы
