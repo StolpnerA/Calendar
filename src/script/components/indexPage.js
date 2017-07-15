@@ -2,6 +2,7 @@ import signIn from "./signIn";
 import db from "./dataBase";
 class indexPage {
   renderPage() {
+    // тут производиться рендер нашей входной страницы
     var div = document.querySelector("div");
     var CreateDiv = `
             <div class="container">
@@ -22,6 +23,7 @@ class indexPage {
     div = div.innerHTML = CreateDiv; // отрисовка страницы
   }
   addHendler() {
+    // тут добавляеца оброботчик на кнопку входа с промисом
     document.querySelector("#butAut").addEventListener("click", () => {
       var log = usr.value;
       var pass = pwd.value;

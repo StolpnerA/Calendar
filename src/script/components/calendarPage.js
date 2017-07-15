@@ -7,8 +7,10 @@ class calendarPage {
     this.renderButtonCalendar();
     this.renderCalendar(dateMonth);
     this.addHandlerEvent(dateMonth);
+    // что-то на подобии конструктора, тут рендерица календарь и добавляюцца обработчики
   }
   buildHeader() {
+    //тут рендерица кто зашел и кнопка выхода
     var header = document.querySelector("header");
     var div = document.querySelector("div");
     header = header.innerHTML = `
@@ -21,11 +23,13 @@ class calendarPage {
             </div>`;
   }
   exitButton() {
+    //обработчик выхода на главную страницу
     document.querySelector("#exit").addEventListener("click", () => {
       location.hash = "";
     });
   }
   RenderPage(dateMonth) {
+    //знаю не лучшее название, тут создаються дивы для рендара календаря и кнопок
     var placeButtonRender = (document.querySelector(
       ".contant"
     ).innerHTML = `<div class="ButtonPlace"></div>`);
@@ -35,6 +39,7 @@ class calendarPage {
     console.log(dateMonth);
   }
   renderButtonCalendar() {
+    // сама отрисовка кнопок
     document.querySelector(".ButtonPlace").innerHTML = `    
           <div align="center">
                 <button class="btn btn-default" id="backButton">Назад</button>
@@ -43,9 +48,12 @@ class calendarPage {
             </div>`;
   }
   renderCalendar(dateMonth) {
-    var year = dateMonth[0];
+    //вот тут рендарица календарь на текущий месяц
+    var year = dateMonth[0]; // разбераеться масив для получения года и месяца
     var month = dateMonth[1];
+
     var arrMonth = [
+      //массив с месяцами для отображения какой сейчас месяц и год
       "Январь",
       "Февраль",
       "Март",
@@ -59,7 +67,7 @@ class calendarPage {
       "Ноябрь",
       "Декабрь"
     ];
-    var showMonth = month - 1;
+    var showMonth = month - 1; // минусуем месяц т.к меняли начало года не с 0 а с 1
     document.querySelector("#tegMonth").innerHTML =
       arrMonth[showMonth] + " " + year;
     function createCalendar(year, month) {
@@ -99,11 +107,12 @@ class calendarPage {
       if (day == 0) day = 7;
       return day - 1;
     }
-    createCalendar(year, month);
+    createCalendar(year, month); //вызов внутренней функции рендара каледаря
 
-    return dateMonth;
+    return dateMonth; // возращяем дату на которую производился рендар календаря
   }
   addHandlerEvent(dateMonth) {
+    // тут добавляються обработчики для листания месяцев + обработчики на удаление и добавлени заголовков
     document
       .querySelector("#backButton")
       .addEventListener("click", () => this.addEventForBackButoon(dateMonth));
@@ -120,6 +129,7 @@ class calendarPage {
       .addEventListener("click", () => this.delCaption(event));
   }
   addEventForForwardButton(dateMonth) {
+    // тут код добавление месяца или года в зависимости какой месяц пришел + вызов функции рендара полученной даты
     var year = dateMonth[0];
     var month = dateMonth[1];
     if (month === 12) {
@@ -131,10 +141,11 @@ class calendarPage {
       month = month + 1;
       dateMonth[1] = month;
     }
-    document.querySelector(".CalendarPlace").innerHTML = "";
-    this.renderCalendar(dateMonth);
+    document.querySelector(".CalendarPlace").innerHTML = ""; // очистка календаря для того что бы даты менялись
+    this.renderCalendar(dateMonth); // тут сам вызов данного метада для рендара
   }
   addEventForBackButoon(dateMonth) {
+    // тут код вычита месяца или года в зависимости какой месяц пришел + вызов функции рендара полученной даты
     var year = dateMonth[0];
     var month = dateMonth[1];
     if (month === 1) {
@@ -146,27 +157,29 @@ class calendarPage {
       month = month - 1;
       dateMonth[1] = month;
     }
-    document.querySelector(".CalendarPlace").innerHTML = "";
-    this.renderCalendar(dateMonth);
+    document.querySelector(".CalendarPlace").innerHTML = ""; // очистка календаря для того что бы даты менялись
+    this.renderCalendar(dateMonth); // тут сам вызов данного метада для рендара
   }
-  addCaption(e, dateMonth) {
+  addCaption(e) {
+    // тут код добавления заголовка
     var target = e.target;
     if (target.tagName !== "TD") return;
     var data = target.className;
     var q = prompt("Введите заголовок события?", "Пожрать");
     if (!q) return;
     target.innerHTML += `<div id="events">${q}<button class="cross">[x]</button></div>`;
-    let dataBase = new db();
-    dataBase.SaveEventInDB(q, data);
+    let dataBase = new db(); //создание экземпляра класса базы данных
+    dataBase.SaveEventInDB(q, data); // вызов метода из базы для добавления евента принимает на вход текст заголовка и тег в какой записали
   }
-  delCaption(e, dateMonth) {
+  delCaption(e) {
+    // тут код для удаления заголовка
     var target = e.target;
     if (target.tagName !== "BUTTON") return;
     var text = target.parentNode.innerHTML.slice(0, -34);
     var date = target.parentNode.parentNode.className;
     target.parentNode.remove();
-    let dataBase = new db();
-    dataBase.deleteEventInDB(date, text);
+    let dataBase = new db(); //создание экземпляра класса базы данных
+    dataBase.deleteEventInDB(date, text); // вызов метода из базы для удаления евента принимает на вход текст заголовка и тег в какой записали
   }
 }
 export default calendarPage;

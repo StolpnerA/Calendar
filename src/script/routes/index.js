@@ -5,12 +5,12 @@ var index = {
   match: "",
   onBeforeEnter: () => console.log(`onBeforeEnter index`),
   onEnter: () => {
-    let index = new indexPage();
-    index.renderPage();
-    index.addHendler();
+    let index = new indexPage(); // создание экземплара класа indexPage
+    index.renderPage(); //рендер страницы
+    index.addHendler(); // добавление обработчика
   },
   onLeave: () => {
-    document.querySelector("div").innerHTML = "";
+    document.querySelector("div").innerHTML = ""; // при покидании данной страницы производиться очистка
   }
 };
 
