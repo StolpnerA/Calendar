@@ -22,7 +22,7 @@ var Calendar = {
     calendar.Render(dateMonth); // рендер страницы и добавление обработчика
   },
   onLeave: () => {
-    //при выходе с страницы чистица header ,div, userOnline
+    //при выходе с страницы чистица header ,div
     document.querySelector("header").innerHTML = "";
     div.innerHTML = "";
   }

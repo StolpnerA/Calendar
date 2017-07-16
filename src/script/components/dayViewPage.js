@@ -3,6 +3,7 @@ class dayViewPage {
   buildPages() {
     this.renderHeader();
     this.exitButton();
+    this.test();
   }
   renderHeader() {
     var header = document.querySelector("header");
@@ -13,9 +14,6 @@ class dayViewPage {
             <p class="lead">${sessionStorage.getItem(
               "user"
             )} <button class="btn btn-default" id="exit">Выход</button><p>
-            </div>`;
-    div = div.innerHTML = ` 
-  <div class="contant">
             </div>`;
   }
   exitButton() {

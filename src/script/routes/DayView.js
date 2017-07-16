@@ -5,8 +5,7 @@ var dayView = {
   onBeforeEnter: () => console.log(`onBeforeEnter index`),
   onEnter: () => {
     let dayView = new dayViewPage();
-    dayView.renderHeader();
-    dayView.exitButton();
+    dayView.buildPages();
   },
   onLeave: () => {
     document.querySelector("div").innerHTML = ""; // при покидании данной страницы производиться очистка

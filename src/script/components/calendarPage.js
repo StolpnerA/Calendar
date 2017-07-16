@@ -113,7 +113,6 @@ class calendarPage {
       return day - 1;
     }
     createCalendar(year, month); //вызов внутренней функции рендара каледаря
-    this.addHandlerEvent(dateMonth);
     return dateMonth; // возращяем дату на которую производился рендар календаря
   }
   addHandlerEvent(dateMonth) {
@@ -128,7 +127,7 @@ class calendarPage {
       );
     document
       .querySelector("table")
-      .addEventListener("dblclick", () => this.addCaption(event, dateMonth));
+      .addEventListener("dblclick", () => this.renderMadal(event));
     document
       .querySelector("table")
       .addEventListener("click", () => this.delCaption(event));
@@ -147,7 +146,7 @@ class calendarPage {
       dateMonth[1] = month;
     }
     document.querySelector(".CalendarPlace").innerHTML = ""; // очистка календаря для того что бы даты менялись
-    //this.renderCalendar(dateMonth); // тут сам вызов данного метада для рендара
+    this.renderCalendar(dateMonth); // тут сам вызов данного метада для рендара
   }
   addEventForBackButoon(dateMonth) {
     // тут код вычита месяца или года в зависимости какой месяц пришел + вызов функции рендара полученной даты
@@ -165,26 +164,53 @@ class calendarPage {
     document.querySelector(".CalendarPlace").innerHTML = ""; // очистка календаря для того что бы даты менялись
     this.renderCalendar(dateMonth); // тут сам вызов данного метада для рендара
   }
-  addCaption(e) {
-    // тут код добавления заголовка
-    var target = e.target;
-    if (target.tagName !== "TD") return;
-    var data = target.className;
-    var q = prompt("Введите заголовок события?", "Пожрать");
-    if (!q) return;
-    target.innerHTML += `<div id="events">${q}<button class="cross">[x]</button></div>`;
-    let dataBase = new db(); //создание экземпляра класса базы данных
-    dataBase.SaveEventInDB(q, data); // вызов метода из базы для добавления евента принимает на вход текст заголовка и тег в какой записали
+  addCaption(taskTitle, taskDescription, data) {
+    let dataBase = new db();
+    document.querySelector(
+      `.${data}`
+    ).innerHTML += `<div>${taskTitle}<button class="cross">[x]</button></div>`;
+    dataBase.SaveEventInDB(taskTitle, taskDescription, data);
   }
   delCaption(e) {
     // тут код для удаления заголовка
     var target = e.target;
-    if (target.tagName !== "BUTTON") return;
+    if (target.tagName != "BUTTON") return;
     var text = target.parentNode.innerHTML.slice(0, -34);
     var date = target.parentNode.parentNode.className;
     target.parentNode.remove();
     let dataBase = new db(); //создание экземпляра класса базы данных
     dataBase.deleteEventInDB(date, text); // вызов метода из базы для удаления евента принимает на вход текст заголовка и тег в какой записали
+  }
+  renderMadal(e) {
+    var target = e.target;
+    if (target.tagName !== "TD") return;
+    var data = target.className;
+    let tbody = document.querySelector("tbody");
+    tbody.innerHTML += `
+        <div class="note-create-form">
+                    <div class="note-header">
+                         <span class="day">${data}</span>
+                         <span class="glyphicon glyphicon glyphicon-remove closeModal"></span>
+                    </div>
+                    <div class="note-title"><input type="text" placeholder="Title" id="taskTitleInput"></div>
+                    <div class="note-body">
+                                <textarea id="taskDescriptionInput">
+                                
+</textarea>
+                            </div>
+                            <button class="btn btn-default my-btn-default">Save</button>
+                        </div>`;
+    let modal = document.querySelector(".note-create-form");
+    let closeModal = modal.querySelector(".closeModal");
+    let save = modal.querySelector("button");
+    modal.style.display = "flex";
+    taskDescriptionInput.value = "";
+    closeModal.addEventListener("click", () => (modal.style.display = "none"));
+    save.addEventListener("click", () => {
+      let taskTitle = taskTitleInput.value;
+      let taskDescription = taskDescriptionInput.value;
+      if (taskTitle) this.addCaption(taskTitle, taskDescription, data);
+    });
   }
 }
 export default calendarPage;
