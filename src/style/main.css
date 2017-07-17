@@ -28,3 +28,17 @@
   background-color: #ffffff;
   padding: 10px;
 }
+.container {
+  bottom: 0;
+  height: 200px;
+  margin: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 220px;
+}
+
+.error {
+  display: none;
+}
