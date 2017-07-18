@@ -20,7 +20,7 @@ class calendarPage {
               "user"
             )} <button class="btn btn-default" id="exit">Выход</button><p>
             </div>`;
-    div = div.innerHTML = ` 
+    div = div.innerHTML = `
   <div class="contant">
             </div>`;
   }
@@ -42,7 +42,7 @@ class calendarPage {
   }
   renderButtonCalendar() {
     // сама отрисовка кнопок
-    document.querySelector(".ButtonPlace").innerHTML = `    
+    document.querySelector(".ButtonPlace").innerHTML = `
           <div align="center">
                 <button class="btn btn-default" id="backButton">Назад</button>
                 <span class="material-design-iconic-font" id="tegMonth"></span>
@@ -195,7 +195,7 @@ class calendarPage {
                     <div class="note-title"><input type="text" placeholder="Title" id="taskTitleInput"></div>
                     <div class="note-body">
                                 <textarea id="taskDescriptionInput">
-                                
+
 </textarea>
                             </div>
                             <button class="btn btn-default my-btn-default">Save</button>
@@ -205,11 +205,14 @@ class calendarPage {
     let save = modal.querySelector("button");
     modal.style.display = "flex";
     taskDescriptionInput.value = "";
-    closeModal.addEventListener("click", () => (modal.style.display = "none"));
+    closeModal.addEventListener("click", () => (document.querySelector(".note-create-form").remove()));
     save.addEventListener("click", () => {
       let taskTitle = taskTitleInput.value;
       let taskDescription = taskDescriptionInput.value;
-      if (taskTitle) this.addCaption(taskTitle, taskDescription, data);
+      if (taskTitle) {
+        this.addCaption(taskTitle, taskDescription, data);
+      }
+      document.querySelector(".note-create-form").remove()
     });
   }
 }
