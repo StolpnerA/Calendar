@@ -174,7 +174,7 @@ class calendarPage {
   delCaption(e) {
     // тут код для удаления заголовка
     var target = e.target;
-    if (target.tagName != "BUTTON") return;
+    if (target.tagName != "BUTTON" || target.className != "cross") return;
     var text = target.parentNode.innerHTML.slice(0, -34);
     var date = target.parentNode.parentNode.className;
     target.parentNode.remove();
@@ -205,11 +205,15 @@ class calendarPage {
     let save = modal.querySelector("button");
     modal.style.display = "flex";
     taskDescriptionInput.value = "";
-    closeModal.addEventListener("click", () => (modal.style.display = "none"));
+    closeModal.addEventListener("click", () => {
+      modal.remove();
+      // modal.style.display = "none";
+    });
     save.addEventListener("click", () => {
       let taskTitle = taskTitleInput.value;
       let taskDescription = taskDescriptionInput.value;
       if (taskTitle) this.addCaption(taskTitle, taskDescription, data);
+      modal.remove();
     });
   }
 }
