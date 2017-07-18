@@ -30,7 +30,7 @@ var path = {
     },
     watch: {
         html: 'src/**/*.html',
-        js: 'src/js/**/*.js',
+        js: 'src/script/**/*.js',
         css: 'src/style/**/*.css',
         img: 'src/img/**/*.*',
         fonts: 'src/fonts/**/*.*'
@@ -40,7 +40,7 @@ var path = {
 
 var config = {
     server: {
-        baseDir: "./dist"
+        baseDir: "./build"
     },
     open: false,
     tunnel: false,
@@ -60,6 +60,7 @@ gulp.task('js:build', function () {
     return gulp.src(path.src.js) //Найдем наш main файл
         .pipe(rigger()) //Прогоним через rigger
         .pipe(sourcemaps.init()) //Инициализируем sourcemap
+
         .pipe(browserify({
             insertGlobals: true,
             debug: !gulp.env.production
@@ -67,7 +68,7 @@ gulp.task('js:build', function () {
         .pipe(babel({
             presets: ['es2015']
         }))
-        //.pipe(uglify()) //Сожмем наш js
+        // .pipe(uglify()) //Сожмем наш js
         .pipe(sourcemaps.write()) //Пропишем карты
         .pipe(gulp.dest(path.build.js)) //Выплюнем готовый файл в build
         .pipe(reload({stream: true})); //И перезагрузим сервер
@@ -132,7 +133,7 @@ gulp.task('webserver', function () {
     browserSync(config);
 });
 
-gulp.task('clean', function () {
+gulp.task('clean', function (cb) {
     rimraf(path.clean, cb);
 });
 

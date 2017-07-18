@@ -27,12 +27,16 @@ class indexPage {
       var log = usr.value;
       var pass = pwd.value;
       let userIn = new signIn();
+      console.log(userIn);
       Promise.resolve()
         .then(() => userIn.trySigninByLoginAndPass(log, pass))
         .catch(() => userIn.tryRegisterWithLoginAndEmail(log, pass))
         .then(() => (location.hash = "Calendar"))
         .catch(
-          () => (document.querySelector(".error").style.display = "block")
+          (error) => {
+            console.dir(error);
+            (document.querySelector(".error").style.display = "block")
+          }
         );
     });
   }

@@ -1,4 +1,7 @@
 class db {
+  constructor() {
+  }
+
   addUser(task, login, pass) {
     //метод добавления пользователя в систему и создание примитивного структуры хранения данных
     if (!task || !login || !pass) return;
@@ -9,7 +12,7 @@ class db {
     localStorage.setItem(`${login}`, JSON.stringify(obj)); // сохранение пользователя в системе
   }
   getAll(login) {
-    var ls = JSON.parse(localStorage.getItem(`${login}`)); // превращение нашего текста с объектом в нормальный объект
+    var ls = JSON.parse(localStorage.getItem(`${login}`) || {}); // превращение нашего текста с объектом в нормальный объект
     return ls;
   }
   SaveEventInDB(taskTitle, taskDescription, dateDay) {
@@ -46,8 +49,9 @@ class db {
   }
   loadFromDB() {
     // загрузки пока нету тут только пока базавая прогрузка объека
-    let obj = this.getAll(sessionStorage.getItem("user"));
+    let obj = this.getAll(sessionStorage.getItem("user") || {});
     let cal = document.querySelector("table");
+    if (Object.keys(obj).length === 0) return;
     for (let dateLoad in obj.tasks) {
       let loadData = obj.tasks[`${dateLoad}`].title;
       let res = cal.querySelector(`.${dateLoad}`);
