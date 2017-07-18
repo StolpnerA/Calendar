@@ -1,5 +1,6 @@
 class db {
   constructor() {
+    this.firebase = window.firebase;
   }
 
   addUser(task, login, pass) {
@@ -9,7 +10,13 @@ class db {
       password: pass,
       tasks: task
     };
-    localStorage.setItem(`${login}`, JSON.stringify(obj)); // сохранение пользователя в системе
+    var users = this.firebase.database().ref("auth/");
+
+    users.push({
+       login,
+       password: pass,
+     });
+    // localStorage.setItem(`${login}`, JSON.stringify(obj)); // сохранение пользователя в системе
   }
   getAll(login) {
     var ls = JSON.parse(localStorage.getItem(`${login}`)); // превращение нашего текста с объектом в нормальный объект
@@ -29,6 +36,14 @@ class db {
     arrDescription.push(taskDescription);
     var arrDone = obj.tasks[`${dateDay}`].done;
     arrDone.push(false);
+
+    var events = this.firebase.database().ref("events/");
+
+    window.console.log(obj);
+
+    events.push(
+       ...obj
+     );
     localStorage.setItem(
       `${sessionStorage.getItem("user")}`,
       JSON.stringify(obj)
