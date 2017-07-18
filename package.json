@@ -29,7 +29,9 @@
     "imagemin-pngquant": "^5.0.1",
     "rimraf": "^2.6.1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "tiny-date-picker": "^2.1.0"
+  },
   "browserify": {
     "transform": [
       [

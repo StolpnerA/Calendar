@@ -1,12 +1,6 @@
-
-import EventBus from './utils/eventBus';
-import Router from './utils/router';
-
-import { index } from './routes/index';
-// Все роуты
-
-const routes = [index];
-
-const eventBus = new EventBus();
-
-new Router({routes}, eventBus);
+import Router from "./utils/Router";
+import { index } from "./routes/index";
+import { Calendar } from "./routes/Calendar";
+import { dayView } from "./routes/DayView";
+const routes = [index, Calendar, dayView];
+new Router({ routes });

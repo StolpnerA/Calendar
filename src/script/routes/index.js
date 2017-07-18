@@ -1,10 +1,17 @@
-var div = document.querySelector('div.main');
+import indexPage from "../components/IndexPage";
+var div = document.querySelector("div");
 var index = {
-    name: 'index',
-    match: '',
-    onBeforeEnter: () => console.log(`onBeforeEnter index`),
-    onEnter: () => console.log(`onEnter index`), //Когда пользователь не авторизован, то показывать произвольный текст на экране
-    onLeave: () => console.log('onLeave index')
+  name: "index",
+  match: "",
+  onBeforeEnter: () => console.log(`onBeforeEnter index`),
+  onEnter: () => {
+    let index = new indexPage(); // создание экземплара класа indexPage
+    index.renderPage(); //рендер страницы
+    index.addHendler(); // добавление обработчика
+  },
+  onLeave: () => {
+    document.querySelector("div").innerHTML = ""; // при покидании данной страницы производиться очистка
+  }
 };
 
 export { index };
