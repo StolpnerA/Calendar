@@ -34,9 +34,9 @@ class db {
       JSON.stringify(obj)
     );
   }
-  deleteEventInDB(dateDay, text) {
+    deleteEventInDB(dateDay, text) {
     //удаление пока только заголовка
-    if (dataDay == undefined) return;
+    if (dateDay == undefined) return;
     var obj = this.getAll(sessionStorage.getItem("user"));
     var index = obj.tasks[`${dateDay}`].title.indexOf(text);
     obj.tasks[`${dateDay}`].title.splice(index, 1);
