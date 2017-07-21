@@ -42,3 +42,65 @@
 .error {
   display: none;
 }
+
+/* настрой SCSS потому что это дичь */
+
+h3 {
+  text-align: center;
+}
+
+.task {
+  border: 1px solid orange;
+  width: 400px;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.task header {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 20px;
+}
+
+.app-header ul li {
+  display: inline-block;
+  margin: 0px;
+  margin-right: 0px;
+  margin-bottom: 30px;
+  border-radius: 2px;
+  min-width: 100px;
+  text-align: center;
+}
+
+.app-header ul li:nth-child(1) {
+  background-color: #2ad076;
+}
+.app-header ul li:nth-child(2) {
+  background-color: #e73a28;
+}
+.app-header ul li:nth-child(3) {
+  background-color: #e99b16;
+}
+.app-header ul li:nth-child(4) {
+  background-color: #327de0;
+}
+
+.app-header ul li a {
+  display: block;
+  width: 100%;
+  color: white;
+  font-size: 15px;
+  padding: 10px 15px;
+}
+
+.app-header ul li:hover {
+  box-shadow: 0px 0px 3px gray;
+}
+
+.app-header ul li a:hover {
+  text-decoration: none;
+}
+
+.app-header ul li a:focus {
+  text-decoration: none;
+}

@@ -1,15 +1,18 @@
-import calendarPage from "../components/CalendarPage";
-//import { userOnline } from "../components/signIn";
+import calendarPage from "../pages/CalendarPage";
+
+
 var div = document.querySelector("div");
-var Calendar = {
-  name: "Calendar",
-  match: text => text === "Calendar",
+
+var calendar = {
+  name: "calendar",
+  match: text => text === "calendar",
   onBeforeEnter: () => {
     // при заходе на страницу проверяеться, залогино ли ты заходишь , если нет то пошел вон!
 
-    if (!sessionStorage.getItem("user")) location.hash = "";
+    if (!sessionStorage.getItem("user")) window.location.hash = "";
   },
-  onEnter: () => {
+  onEnter: (url, db) => {
+    console.log(db);
     // тут создаеться массив с годом и месяцем для передачи его в рендер
     let dateMonth = [];
     let date = new Date();
@@ -18,7 +21,7 @@ var Calendar = {
     dateMonth.push(yer);
     dateMonth.push(mont + 1);
     //
-    let calendar = new calendarPage(); // создание экземпляра класса
+    let calendar = new calendarPage(db); // создание экземпляра класса
     calendar.Render(dateMonth); // рендер страницы и добавление обработчика
   },
   onLeave: () => {
@@ -28,4 +31,4 @@ var Calendar = {
   }
 };
 
-export { Calendar };
+export { calendar };

@@ -1,5 +1,8 @@
-import indexPage from "../components/IndexPage";
+import indexPage from "../pages/IndexPage";
+
+
 var div = document.querySelector("div");
+
 var index = {
   name: "index",
   match: "",
